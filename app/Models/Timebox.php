@@ -20,9 +20,9 @@ class Timebox extends Model
     }
 
     // A timebox can have many tasks
+    //✅ Now, each task can belong to multiple timeboxes, and each timebox can hold multiple tasks.
     public function tasks(){
-        return $this->belongsTo(Task::class, 'task_timebox')
-        ->withTimestamps();
+        return $this->belongsToMany(Task::class, 'task_timebox')->withTimestamps();
     }
 
 }

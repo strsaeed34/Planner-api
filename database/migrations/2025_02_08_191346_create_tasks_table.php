@@ -14,11 +14,16 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('goal_id')->nullable()->constrained()->onDelete('set null');
             $table->string('title');
-            $table->text('description');
-            $table->boolean('is_completed');
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
+            $table->text('description')->nullable();
+            $table->boolean('is_recursive')->default(false);
+            $table->integer('estimated_time')->nullable(); // ⏳ Estimated duration in minutes
+            $table->enum('status', ['pending', 'in_progress', 'completed', 'canceled'])->default('pending'); // 🏁 Task status
+            $table->enum('priority', ['low', 'medium', 'high'])->default('medium'); // ⚡ Priority level
+            $table->date('date')->nullable();
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->timestamps();
         });
     }

@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->text('content');
+            $table->text('content'); 
+            $table->string('color')->default('#3498db'); // Default color          
             $table->timestamps();
+           
         });
     }
 
@@ -26,5 +28,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('notes');
+
+      
     }
 };

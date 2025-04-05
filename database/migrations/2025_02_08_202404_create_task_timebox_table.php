@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('task_id')->constrained()->onDelete('cascade');
             $table->foreignId('timebox_id')->constrained()->onDelete('cascade');
+            $table->boolean('is_intime')->default(false);   
             $table->timestamps();
         });
     }
